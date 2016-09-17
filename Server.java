@@ -9,10 +9,11 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Server {
-    private ObjectOutputStream outputStream;
-    private ObjectInputStream inputStream;
+    private static ObjectOutputStream outputStream;
+    private static ObjectInputStream inputStream;
 
-    public Server() {
+
+    public static void main(String[] args) {
         try {
 
             ServerSocket serverSocket = new ServerSocket(9999);
@@ -33,7 +34,7 @@ public class Server {
                 System.out.println("Port:");
                 int port = input.nextInt();
 
-                outputStream= new ObjectOutputStream(socket.getOutputStream());
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
                 outputStream.writeObject(new NetworkingObject(host, port));
                 System.out.println("An object sent to client is " + new NetworkingObject(host, port).toString());
 
@@ -51,10 +52,6 @@ public class Server {
                 ex.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Server();
     }
 }
 
